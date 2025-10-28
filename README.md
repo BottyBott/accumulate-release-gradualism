@@ -56,9 +56,4 @@ pytest
 
 Tests validate the leaky integrate–and–fire solution against the analytic period, ensure the simulator handles staircases correctly, and confirm that cycle summaries match event logs.
 
-## Extending the lab
-- Add new scenarios by appending to `data/scenarios.json`. Provide the driver type (`leaky`, `linear`, or `piecewise`), thresholds, and reset rules.
-- Use `arg_lab.simulate.simulate_ensemble` to investigate jittered parameter sets and quantify synchrony or dispersion across many units.
-- Feed real telemetry into the analysis routines by constructing a DataFrame with the expected column names (`time`, `accumulator`, `order_parameter`, `release`) and passing it to `summarize_cycles`.
 
-Everything required to understand, run, and extend the accumulate–release gradualism toolkit is contained inside this repository.
