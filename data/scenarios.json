@@ -1,0 +1,57 @@
+{
+  "scenarios": [
+    {
+      "id": "leaky_neuron",
+      "label": "Leaky integrate-and-fire cycle",
+      "description": "Single accumulator with constant drive and linear leakage, representing a canonical saw-tooth.",
+      "dt": 0.001,
+      "duration": 2.0,
+      "initial_state": 0.2,
+      "driver": {
+        "type": "leaky",
+        "rate": 1.35,
+        "leak": 1.0
+      },
+      "thresholds": [
+        {"theta": 1.0, "reset": 0.25, "delta_s": 1.0}
+      ]
+    },
+    {
+      "id": "staircase_ladder",
+      "label": "Three-step accumulation ladder",
+      "description": "Accumulator climbs through three thresholds with partial releases that create a staircase trace before full reset.",
+      "dt": 0.002,
+      "duration": 6.0,
+      "initial_state": 0.0,
+      "driver": {
+        "type": "linear",
+        "rate": 0.55
+      },
+      "thresholds": [
+        {"theta": 1.2, "reset": 0.8, "delta_s": 0.5},
+        {"theta": 1.9, "reset": 0.9, "delta_s": 0.8},
+        {"theta": 2.4, "reset": 0.3, "delta_s": 1.2}
+      ]
+    },
+    {
+      "id": "queue_release",
+      "label": "Buffered queue with relief valve",
+      "description": "Buffer fills at varying rate with stochastic inflow; when capacity is reached a relief valve dumps most contents and leaves a residual backlog.",
+      "dt": 0.01,
+      "duration": 30.0,
+      "initial_state": 1.0,
+      "driver": {
+        "type": "piecewise",
+        "segments": [
+          {"end": 10.0, "rate": 0.35},
+          {"end": 20.0, "rate": 0.5},
+          {"end": 30.0, "rate": 0.25}
+        ],
+        "noise_std": 0.03
+      },
+      "thresholds": [
+        {"theta": 4.5, "reset": 0.9, "delta_s": 2.5}
+      ]
+    }
+  ]
+}
